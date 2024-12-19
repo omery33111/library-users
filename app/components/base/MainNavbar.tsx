@@ -1,18 +1,14 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 
-
-// Styled components
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -54,20 +50,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// Main Navbar Component
-const MainNavbar = () => {
+const MainNavbar = ({ onSearch }: { onSearch: (query: string) => void }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    onSearch(query);
+  };
+
   return (
     <Box sx={{ flexGrow: 1, paddingBottom: "10vh" }}>
-      <AppBar sx = {{backgroundColor: "#3E5879"}}>
+      <AppBar sx={{ backgroundColor: "#3E5879" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
           <Typography
             variant="h6"
             noWrap
@@ -81,8 +76,10 @@ const MainNavbar = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search User…"
               inputProps={{ 'aria-label': 'search' }}
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
           </Search>
         </Toolbar>

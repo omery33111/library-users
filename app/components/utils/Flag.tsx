@@ -18,11 +18,7 @@ const Flag = ({ country }: { country: string }) => {
 
   if (!flagUrl) return null;
   return (
-    <img
-      src={flagUrl}
-      alt={`${country} flag`}
-      style={{ width: "24px", height: "16px", objectFit: "cover", borderRadius: "2px", marginRight: "8px" }}
-    />
+    <img src={flagUrl} alt={`${country} flag`} className = "country-flags" />
   );
 };
 

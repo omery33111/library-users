@@ -24,10 +24,20 @@ export interface UserGet {
 }
 
 
-export interface UserUpdate {
-    uuid: string;
-    name: { first: string; last: string };
+export interface UserPost {
+    uuid?: string;
+    name: { 
+        first: string;
+        last: string;
+        title: string;
+    };
     email: string;
-    location: { country: string; city: string; street: { name: string; number: number } };
+    location: {
+        country: string;
+        city: string;
+        street: {
+            name: string;
+            number: number
+        }
+    };
 }
-  
