@@ -5,10 +5,12 @@ import { Container } from '@mui/material';
 import { useState } from 'react';
 import CardUsers from '../users/CardUsers';
 import PostUser from '../users/PostUser';
+import { UserGet } from '@/app/models/User';
 
 
 const MainContent = ({ searchQuery }: { searchQuery: string }) => {
   const [showForm, setShowForm] = useState(false);
+  const [localUsers] = useState<UserGet[]>([]);
 
   const handleAddUserClick = () => {
     setShowForm(!showForm);
@@ -24,13 +26,12 @@ const MainContent = ({ searchQuery }: { searchQuery: string }) => {
       </div>
 
       {showForm && (
-        <PostUser
-          user={{ name: { title: '', first: '', last: '' }, email: '', location: { country: '', city: '', street: { name: '', number: 0 } } }}
-          onClose={() => setShowForm(false)}
-          onSave={(data) => {
-            console.log('Saved User:', data);
-          }}
-        />
+        <PostUser user={{ name: { title: '', first: '', last: '' }, email: '', location: { country: '', city: '', street: { name: '', number: 0 } } }}
+                  onClose={() => setShowForm(false)}
+                  onSave={(data) => {
+                    console.log('Saved User:', data);
+                  }}
+                  localUsers={localUsers}/>
         )}
       
       <CardUsers searchQuery={searchQuery} />
