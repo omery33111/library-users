@@ -1,17 +1,23 @@
-import { UserPost } from "@/app/models/User";
+import { UserGet, UserPost } from "@/app/models/User";
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography} from "@mui/material";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { useQuery } from "@tanstack/react-query";
+import { getUsers } from "./usersAPI";
+
 
 interface UserFormGroupProps {
   user: UserPost;
   onClose: () => void;
+  localUsers: UserGet[];
 }
 
-const UserFormGroup: React.FC<UserFormGroupProps> = ({ user, onClose }) => {
+const UserFormGroup: React.FC<UserFormGroupProps> = ({ user, onClose, localUsers  }) => {
 
   const { register, formState: { errors }} = useFormContext<UserPost>();
 
+  const { data: usersData } = useQuery({ queryKey: ["users"], queryFn: getUsers });
+  const users = usersData?.data || [];
   return (
     <>
       <FormControl fullWidth margin="normal">
@@ -53,17 +59,24 @@ const UserFormGroup: React.FC<UserFormGroupProps> = ({ user, onClose }) => {
                 helperText={errors.name?.last?.message}/>
 
       <TextField fullWidth
-                label="Email"
-                margin="normal"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "Invalid email address",
-                  },
-                })}
-                error={!!errors.email}
-                helperText={errors.email?.message}/>
+                  label="Email"
+                  margin="normal"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Invalid email address",
+                    },
+                    validate: (email) => {
+                      if (localUsers?.some((u) => u.email === email)) {
+                        return "Email already exists. Each user must have a unique email.";
+                      }
+                      return true;
+                    },
+                  })}
+                    error={!!errors.email}
+                    helperText={errors.email?.message}/>
+
 
       <TextField fullWidth
                 label="Country"
@@ -102,7 +115,7 @@ const UserFormGroup: React.FC<UserFormGroupProps> = ({ user, onClose }) => {
         <Button variant="outlined" onClick={onClose} sx={{ border: "1px solid #636B74", color: "#636B74" }}>
           Cancel
         </Button>
-        <Button variant="contained" type="submit" sx={{ backgroundColor: "#636B74" }}>
+        <Button variant="contained" type="submit" sx={{ backgroundColor: "#636B74" }} disabled={Object.keys(errors).length > 0}>
           Save
         </Button>
       </Box>

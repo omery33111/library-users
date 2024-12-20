@@ -12,7 +12,7 @@ import CardContent from "@mui/joy/CardContent";
 import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Flag from "../utils/Flag";
 import Loader from "../utils/Loader";
 import DeleteUserModal from "./DeleteUserModal";
@@ -28,8 +28,9 @@ const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
 
   const [selectedUser, setSelectedUser] = useState<UserGet | null>(null);
   const [userToDelete, setUserToDelete] = useState<UserGet | null>(null);
+  const [localUsers, setLocalUsers] = useState<UserGet[]>([]);
 
-  const filteredUsers = users?.data.filter(
+  const filteredUsers = localUsers.filter(
     (user) =>
       user.name.first.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.name.last.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -57,6 +58,12 @@ const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
     console.log("Updated user:", updatedUser);
     setEditModalOpen(false);
   };
+
+  useEffect(() => {
+    if (users?.data && localUsers.length === 0) {
+      setLocalUsers(users.data);
+    }
+  }, [users?.data]);
 
   if (isLoading) return <Loader />;
   if (error instanceof Error) return <p>Error: {error.message}</p>;
@@ -119,6 +126,7 @@ const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
         <EditUserModal open={isEditModalOpen}
                         onClose={() => setEditModalOpen(false)}
                         user={selectedUser}
+                        localUsers={localUsers}
                         onSave={(updatedUser: UserPost) => handleSave(updatedUser as UserGet)}/>
       )}
 

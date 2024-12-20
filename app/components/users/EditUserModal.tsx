@@ -1,6 +1,6 @@
 "use client";
 
-import { UserPost } from "@/app/models/User";
+import { UserGet, UserPost } from "@/app/models/User";
 import { Box, Modal, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -11,9 +11,10 @@ interface EditUserModalProps {
   onClose: () => void;
   user: UserPost;
   onSave: (updatedUser: UserPost) => void;
+  localUsers: UserGet[];
 }
 
-const EditUserModal: React.FC<EditUserModalProps> = ({ open, onClose, user, onSave }) => {
+const EditUserModal: React.FC<EditUserModalProps> = ({ open, onClose, user, onSave, localUsers }) => {
   const methods = useForm<UserPost>({
     defaultValues: user || {},
   });
@@ -47,7 +48,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ open, onClose, user, onSa
         <Typography variant="h6" component="h2">Edit User</Typography>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
-          <UserFormGroup user={user} onClose={onClose} />
+          <UserFormGroup user={user} onClose={onClose} localUsers={localUsers} />
           </form>
         </FormProvider>
       </Box>
