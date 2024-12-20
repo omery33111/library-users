@@ -1,18 +1,18 @@
-import { UserGet, UserPost } from "@/app/models/User";
+import { UserGet, UserIns } from "@/app/models/User";
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography} from "@mui/material";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
 
 interface UserFormGroupProps {
-  user: UserPost;
+  user: UserIns;
   onClose: () => void;
   localUsers: UserGet[];
 }
 
 const UserFormGroup: React.FC<UserFormGroupProps> = ({ user, onClose, localUsers }) => {
 
-  const { register, formState: { errors }} = useFormContext<UserPost>();
+  const { register, formState: { errors }} = useFormContext<UserIns>();
 
   return (
     <>

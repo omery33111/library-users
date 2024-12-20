@@ -1,25 +1,25 @@
 "use client";
 
-import { UserGet, UserPost } from '@/app/models/User';
+import { UserGet, UserIns } from '@/app/models/User';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import UserFormGroup from './UserFormGroup';
 
 interface PostUserProps {
   onClose: () => void;
-  user: UserPost;
-  onSave: (data: UserPost) => void;
+  user: UserIns;
+  onSave: (data: UserIns) => void;
   localUsers: UserGet[];
 }
 
 const PostUser: React.FC<PostUserProps> = ({ onClose, user, onSave, localUsers }) => {
-  const methods = useForm<UserPost>({
+  const methods = useForm<UserIns>({
     defaultValues: user,
   });
 
   const { handleSubmit } = methods;
 
-  const onSubmit: SubmitHandler<UserPost> = (data) => {
+  const onSubmit: SubmitHandler<UserIns> = (data) => {
     onSave({ ...user, ...data });
     onClose();
   };

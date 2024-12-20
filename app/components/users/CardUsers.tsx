@@ -18,7 +18,7 @@ import Loader from "../utils/Loader";
 import DeleteUserModal from "./DeleteUserModal";
 import EditUserModal from "./EditUserModal";
 import { getUsers } from "./usersAPI";
-import { UserGet, UserPost } from "@/app/models/User";
+import { UserGet, UserIns } from "@/app/models/User";
 
 const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
   const {data: users, isLoading, error} = useQuery({ queryKey: ["users"], queryFn: getUsers });
@@ -127,7 +127,7 @@ const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
                         onClose={() => setEditModalOpen(false)}
                         user={selectedUser}
                         localUsers={localUsers}
-                        onSave={(updatedUser: UserPost) => handleSave(updatedUser as UserGet)}/>
+                        onSave={(updatedUser: UserIns) => handleSave(updatedUser as UserGet)}/>
       )}
 
       {userToDelete && (

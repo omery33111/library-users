@@ -24,7 +24,7 @@ export interface UserGet {
 }
 
 
-export interface UserPost {
+export interface UserIns {
     uuid?: string;
     name: { 
         first: string;

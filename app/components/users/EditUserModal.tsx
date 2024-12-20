@@ -1,6 +1,6 @@
 "use client";
 
-import { UserGet, UserPost } from "@/app/models/User";
+import { UserGet, UserIns } from "@/app/models/User";
 import { Box, Modal, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -9,13 +9,13 @@ import UserFormGroup from "./UserFormGroup";
 interface EditUserModalProps {
   open: boolean;
   onClose: () => void;
-  user: UserPost;
-  onSave: (updatedUser: UserPost) => void;
+  user: UserIns;
+  onSave: (updatedUser: UserIns) => void;
   localUsers: UserGet[];
 }
 
 const EditUserModal: React.FC<EditUserModalProps> = ({ open, onClose, user, onSave, localUsers }) => {
-  const methods = useForm<UserPost>({
+  const methods = useForm<UserIns>({
     defaultValues: user || {},
   });
 
@@ -27,7 +27,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ open, onClose, user, onSa
     }
   }, [user, reset]);
 
-  const onSubmit: SubmitHandler<UserPost> = (data) => {
+  const onSubmit: SubmitHandler<UserIns> = (data) => {
     onSave({ ...user, ...data });
     onClose();
   };
