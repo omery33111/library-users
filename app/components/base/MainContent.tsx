@@ -15,7 +15,7 @@ const MainContent = ({ searchQuery }: { searchQuery: string }) => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" style = {{height: "100vh"}}>
       <div style = {{display: "flex", justifyContent: "space-between", marginBottom: "1vh"}}>
         <h2>Users</h2>
             <Button variant="solid" size='sm' onClick={handleAddUserClick} style = {{alignItems: "center", backgroundColor: "#213555"}}>
@@ -32,7 +32,7 @@ const MainContent = ({ searchQuery }: { searchQuery: string }) => {
           }}
         />
         )}
-        
+      
       <CardUsers searchQuery={searchQuery} />
       
     </Container>

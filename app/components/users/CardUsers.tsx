@@ -60,6 +60,7 @@ const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
 
   if (isLoading) return <Loader />;
   if (error instanceof Error) return <p>Error: {error.message}</p>;
+  if (!filteredUsers || filteredUsers.length === 0) return <h1 className = "loader">No users found</h1>;
 
   return (
     <div className="card-map">
