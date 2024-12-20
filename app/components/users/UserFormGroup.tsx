@@ -2,8 +2,6 @@ import { UserGet, UserPost } from "@/app/models/User";
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography} from "@mui/material";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { useQuery } from "@tanstack/react-query";
-import { getUsers } from "./usersAPI";
 
 
 interface UserFormGroupProps {
@@ -16,8 +14,6 @@ const UserFormGroup: React.FC<UserFormGroupProps> = ({ user, onClose, localUsers
 
   const { register, formState: { errors }} = useFormContext<UserPost>();
 
-  const { data: usersData } = useQuery({ queryKey: ["users"], queryFn: getUsers });
-  const users = usersData?.data || [];
   return (
     <>
       <FormControl fullWidth margin="normal">
