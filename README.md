@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#
 
-## Getting Started
 
-First, run the development server:
+[![Live Firebase Server](https://img.shields.io/badge/Live%20on-Firebase-00ad9f.svg)](https://library-users-50453.web.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[![Last Commit on GitHub](https://img.shields.io/github/last-commit/omery33111/library-users.svg)](https://github.com/omery33111/library-users/commits/main)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![Pull Requests](https://img.shields.io/github/issues-pr/omery33111/library-users.svg?labelColor=24292E&logo=github&logoColor=white)](https://github.com/omery33111/library-users/pulls)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Table of Contents
+- [Technologies](#technologies) 🛠️
+- [Running Instructions](#running-instructions) 🖱️
+  - [Deployments](#deployments) ✈️
+  - [Project adjustment](#front-end-adjustment) 🖥️
+- [Contact](#contact) 📞
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies
+* **Next.js**: a React framework for building web applications, offering support for    server-side rendering (SSR), static site generation (SSG), and client-side rendering (CSR).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **React-Query**: a powerful library for React that simplifies server state management, offering efficient tools for fetching, caching, and updating data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* **TypeScript**: a superset of JavaScript that adds static types, enabling better code organization and easier debugging.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Running Instructions
+### Deployments
+The project is hosted by [Firebase](https://library-users-50453.web.app/).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#
+
+In order to make the software work properly in your local host, the steps below must be followed:
+
+### Project adjustment
+
+| Step | Command | Explanation |
+| --- | --- | --- |
+| 1 | `cd .\front-end\` | Navigate to the front-end directory|
+| 2 | `npm install` | Install the front-end dependencies |
+| 4 | `npm run dev` | Run the front-end server |
+
+**Now you will be able to access the library in your local host** "http://localhost:3000".
+
+
+
+## Contact
+
+📧 omery33111@gmail.com
+
+ℹ️ https://www.linkedin.com/in/omer-yanai/
+
+🐱 https://github.com/omery33111

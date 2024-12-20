@@ -18,19 +18,16 @@ import Loader from "../utils/Loader";
 import DeleteUserModal from "./DeleteUserModal";
 import EditUserModal from "./EditUserModal";
 import { getUsers } from "./usersAPI";
+import { UserGet, UserPost } from "@/app/models/User";
 
 const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
-  const {
-    data: users,
-    isLoading,
-    error,
-  } = useQuery({ queryKey: ["users"], queryFn: getUsers });
+  const {data: users, isLoading, error} = useQuery({ queryKey: ["users"], queryFn: getUsers });
 
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [userToDelete, setUserToDelete] = useState(null);
+  const [selectedUser, setSelectedUser] = useState<UserGet | null>(null);
+  const [userToDelete, setUserToDelete] = useState<UserGet | null>(null);
 
   const filteredUsers = users?.data.filter(
     (user) =>
@@ -40,12 +37,12 @@ const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
       user.location.country.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleEditClick = (user: any) => {
+  const handleEditClick = (user: UserGet) => {
     setSelectedUser(user);
     setEditModalOpen(true);
   };
 
-  const handleDeleteClick = (user: any) => {
+  const handleDeleteClick = (user: UserGet) => {
     setUserToDelete(user);
     setDeleteModalOpen(true);
   };
@@ -56,7 +53,7 @@ const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
     setUserToDelete(null);
   };
 
-  const handleSave = (updatedUser: any) => {
+  const handleSave = (updatedUser: UserGet) => {
     console.log("Updated user:", updatedUser);
     setEditModalOpen(false);
   };
@@ -118,21 +115,17 @@ const CardUsers = ({ searchQuery }: { searchQuery: string }) => {
       ))}
 
       {selectedUser && (
-        <EditUserModal
-          open={isEditModalOpen}
-          onClose={() => setEditModalOpen(false)}
-          user={selectedUser}
-          onSave={handleSave}
-        />
+        <EditUserModal open={isEditModalOpen}
+                        onClose={() => setEditModalOpen(false)}
+                        user={selectedUser}
+                        onSave={(updatedUser: UserPost) => handleSave(updatedUser as UserGet)}/>
       )}
 
       {userToDelete && (
-        <DeleteUserModal
-          open={isDeleteModalOpen}
-          onClose={() => setDeleteModalOpen(false)}
-          user={userToDelete}
-          onDelete={handleDeleteConfirm}
-        />
+        <DeleteUserModal open={isDeleteModalOpen}
+                          onClose={() => setDeleteModalOpen(false)}
+                          user={userToDelete}
+                          onDelete={handleDeleteConfirm}/>
       )}
     </div>
   );
