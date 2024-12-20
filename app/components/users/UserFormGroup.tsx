@@ -12,7 +12,7 @@ interface UserFormGroupProps {
   localUsers: UserGet[];
 }
 
-const UserFormGroup: React.FC<UserFormGroupProps> = ({ user, onClose, localUsers  }) => {
+const UserFormGroup: React.FC<UserFormGroupProps> = ({ user, onClose, localUsers }) => {
 
   const { register, formState: { errors }} = useFormContext<UserPost>();
 
